@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SGV</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">SGV</a>
+    </div>
+    <ul class="nav navbar-nav">
+    
+      <li class="active"><a href="/home">Home</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Minha conta<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/trocasenha">Trocar senha</a></li>
+        </ul>
+      </li>
+      
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Veículos<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/consultas/veiculos/responsabilidade/minha">Veículos em minha responsabilidade</a></li>
+          <li><a href="/veiculos/adquiri">Adquirir veículo</a></li>
+          <li><a href="/veiculos/devolver">Devolver veiculo</a></li>
+        </ul>
+      </li>
+      
+      
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+    </ul>
+  </div>
+</nav>
+  
+<div class="container">
+  <h3>Bem vindo <%= msg %> </h3>
+  <p>Esse sistema consiste em um sistema de rotas de veículos.</p>
+</div>
+
+</body>
+</html>

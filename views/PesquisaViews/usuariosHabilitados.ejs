@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Usuário habilitados</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+<% include ../Fixos/UsuarioNavBar.ejs %>
+  
+<div class="container">
+  <h2>Usuário habilitados</h2>
+  <p>Lista de todos os usuários habilitados cadastrado no sistema:</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Matrícula</th>
+        <th>Nome</th>
+		<th>Data de nascimento</th>
+		<th>Função</th>
+		<th>Perfil</th>
+		<th>Categoria</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% docs.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.matricula %> </td>
+       		<td> <%= customer.nome %> </td>
+			<td> <%= customer.dataDeNascimento %> </td>
+			<td> <%= customer.funcao %> </td>
+			<td> <%= customer.perfil %> </td>			
+            <td> <%= customer.categoria %> </td>
+         </tr>
+      	<% }) %>      
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

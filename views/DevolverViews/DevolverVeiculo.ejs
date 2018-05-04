@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Devolver Veiculo</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+  <% include ../Fixos/VeiculosComunNavBar.ejs %>
+  
+<div class="container">
+   <h2>Devolver Veículo</h2>
+  <p>Devolver veículo que está em sua responsabilidade.</p>
+  <%if (MostrarDados === 1) { %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Marca</th>
+        <th>Tipo</th>
+        <th>Categoria de CNH</th>
+		    <th>Status</th>
+        <th>Quilometragem</th>
+		    <th>Combustível</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% Veiculo.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.placa %> </td>
+       		<td> <%= customer.marca %> </td>			
+			    <td> <%= customer.tipo %> </td>
+          <td> <%= customer.categoriaDeCNH %> </td>
+			    <td> <%= customer.status %> </td>				
+          <td> <%= customer.quilometragem %> </td> 
+			    <td> <%= customer.combustivel %> </td> 		
+          <td><button type="button" id="btnS<%= customer.placa %>" class="btn btn-primary">Selecionar</button></td>
+         </tr>
+                    
+      <% }) %>      
+    </tbody>
+  </table>
+
+  <% Veiculo.forEach(function(customer){ %>
+
+  <form id="myForm<%= customer.placa %>" action="/veiculos/devolver" method="POST" class="hidden">
+    <input type="hidden" name="placa" value=<%= customer.placa %> />
+    
+    <div class="form-group">
+        <label for="quilometragem">Quilometragem atual:</label>
+  <input type="text" class="form-control" name="quilometragem" id="quilometragem">
+</div>
+    
+    <div class="form-group">
+        <label for="data">Data da devolução:</label>
+        <input type="date" name="data" id="datepicker" placeholder="Data do abastecimento"  min="1000-01-01"  max="3000-12-31" class="form-control">
+</div>
+    
+    <div class="form-group">
+        <label for="funcao">Nivel de Tanque:</label>
+         <select class="form-control" name="niveldeTanque" id="niveldeTanque">
+            <option>Completo</option>
+            <option>Reserva</option>
+            <option>Abaixo de meio tanque</option>   
+            <option>Acima de meio tanque</option> 
+            <option>Meio tanque</option> 
+        </select>
+      </div>
+      
+    <div class="form-group">
+        <label for="notasentreges">Entregou as notas:</label>
+         <select class="form-control" name="notasentreges" id="notasentreges">
+            <option>Sim</option>
+            <option>Não</option>
+        </select>
+    </div>
+    <input type="submit" class="btn btn-primary" value="Devolver" />
+</form>
+
+<script>
+  $( "#btnS<%= customer.placa %>" ).click(function() {
+    $("form").addClass("hidden");
+    $("#myForm<%= customer.placa %>").removeClass("hidden");
+});
+</script>
+
+<% }) %>     
+
+  <% } else if (MostrarDados === 3) { %>         
+      
+	  <div class="alert alert-danger">
+		<strong>Erro!</strong> <%= erro %> .
+	  </div>
+	  
+  <% } else if (MostrarDados === 4) { %>
+		
+	  <div class="alert alert-success">
+		<strong>Sucesso!</strong> <%= erro %> .
+      </div>
+
+  <% } %>
+</div>
+
+</body>
+</html>

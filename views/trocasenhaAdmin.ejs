@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SGV</title>
+  <meta charset="utf-8">
+  <% include Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">SGV</a>
+          </div>
+          <ul class="nav navbar-nav">
+          
+            <li><a href="/home">Home</a></li>
+            <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown">Usuário<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/cadastro/usuarios">Cadastrar Usuário</a></li>
+                <li><a href="/consultas/usuarios/habilitados">Usuários Hábilitados</a></li>
+                <li><a href="/trocasenha">Trocar senha</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Veículos<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="/cadastro/veiculos">Cadastrar de veículos</a></li>
+                <li><a href="/consultas/veiculos/disponiveis">Veículos disponiveis</a></li>
+                <li><a href="/consultas/veiculos/manutencao">Veículos em manutenção</a></li>
+                <li><a href="/consultas/veiculos/porusuario">Veículos por usuário</a></li>
+              </ul>
+            </li>
+            
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+          </ul>
+        </div>
+      </nav>
+  
+<div class="container">
+    <h2>Troca senha</h2>
+    <form action="/trocasenha" method="post">
+      <div class="form-group">
+        <label for="email">Senha atual:</label>
+        <input type="password" class="form-control" id="pwdAntiga" placeholder="Digite a sua senha antiga" name="pwdAntiga">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Nova senha:</label>
+        <input type="password" class="form-control" id="pwdNova" placeholder="Digite a sua nova senha" name="pwdNova">
+      </div>
+       
+      <div class="form-group">
+        <label for="pwd">Confirma nova senha:</label>
+        <input type="password" class="form-control" id="ConfirmapwdNova" placeholder="Confirme a sua nova senha" name="ConfirmapwdNova">
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+  </br>
+    <% if (MostrarDados === 3) { %>         
+      
+      <div class="alert alert-danger">
+      <strong>Erro!</strong> <%= msg %>.
+      </div>
+      
+    <% } else if (MostrarDados === 4) { %>
+      
+      <div class="alert alert-success">
+      <strong>Sucesso!</strong> <%= msg %>.
+        </div>
+    
+    <% } %>
+
+
+</div>
+
+</body>
+</html>

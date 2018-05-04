@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cadastro de veículos</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</head>
+<script>
+ 
+$(document).ready(function(){
+    $("form").submit(function(){
+	var marcaF = $("#marca").val();
+    var anoF = $("#ano").val();
+    var placaF = $("#placa").val();
+    var tipoF = $("#tipo").val();
+    var statusF = $("#status").val();	
+    var quilometragemF = $("#quilometragem").val();
+	var combustivelF = objToString($("#combustivel").val());
+    var CategoriaCNHF = objToString($("#categoriaCNH").val());
+	
+    //$.post("/caduser", { matricula: matriculaF, nome: nomeCompletoF , dataDeNascimento: DatadeNascF , funcao: funcaoF ,categoria : CategoriaCNHF , perfil: PerfilSelecionadoF , password: SenhaF } );
+    
+    $.post("/cadastro/veiculos",
+        { placa: placaF , marca: marcaF , tipo: tipoF , categoriaDeCNH: CategoriaCNHF ,status: statusF , quilometragem: quilometragemF , combustivel: combustivelF },
+    function(data,response){
+
+      if(data != "Favor preencher todos os campos"){
+        document.getElementById("Mform").reset();
+      } 
+      
+      if (data == "Cadastro realizado com sucesso") {
+        $("#message").text(data);
+        $("#erroAlert").addClass("hidden");
+        $("#sucessAlert").removeClass("hidden");
+      } else {
+        $("#message2").text(data);
+        $("#sucessAlert").addClass("hidden");
+        $("#erroAlert").removeClass("hidden");
+      }
+
+
+    });    
+	    return false;
+    });
+});
+
+function objToString (obj) {
+    var str = '';
+    for (var p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str += obj[p] + ',';
+        }
+    }
+    return str.substring(0, str.length - 1);;
+}
+
+</script>
+<body>
+
+<% include ../Fixos/VeiculosNavBar.ejs %>
+  
+<div class="container">
+  <h2>Cadastro de Veículos</h2>  
+  <form id="Mform">
+  
+    <div class="form-group">
+      <label for="marca">Marca/Modelo:</label>
+      <input type="text" class="form-control" id="marca" placeholder="Marca ou Modelo" name="marca">
+    </div>   
+	
+    <div class="form-group">
+        <label>Ano:</label>
+        <input type="date" name="bday" id="ano" min="1000-01-01" max="3000-12-31" class="form-control">
+    </div>
+	
+    <div class="form-group">
+      <label for="placa">Placa:</label>
+      <input type="text" class="form-control" id="placa" placeholder="Placa do veículo" name="email">
+    </div>
+    
+    <div class="form-group">
+      <label for="quilometragem">Quilometragem:</label>
+      <input type="text" class="form-control" id="quilometragem" placeholder="Quilometragem do veículo em KM " name="email">
+    </div>
+    
+    <div class="form-group">
+    	<label for="tipo">Tipo:</label>
+     	 <select class="form-control" id="tipo">
+      		<option>Caminhão</option>
+       		<option>Carro</option>
+        	<option>Moto</option>        
+      	</select>
+    </div>
+    
+    <div class="form-group">
+    	<label for="status">Status do veículo:</label>
+     	 <select class="form-control" id="status">
+      		<option>Disponível</option>
+       		<option>Indisponível</option>
+        	<option>Manutenção</option> 
+            <option>Desativado</option>         
+      	</select>
+    </div>
+    
+	<div class="form-group">
+      <label for="combustivel">Combustível (segure Ctrl para selecionar vários):</label>
+      <select multiple class="form-control" id="combustivel">
+        <option>Gasolina</option>
+        <option>Álcool</option>
+        <option>Diesel</option>
+        <option>Gás</option> 		
+      </select>
+    </div>
+	
+     <div class="form-group">
+      <label for="categoriaCNH">Selecione a categoria da CNH (segure Ctrl para selecionar vários):</label>
+      <select multiple class="form-control" id="categoriaCNH">
+        <option>Categoria A</option>
+        <option>Categoria B</option>
+        <option>Categoria C</option>
+        <option>Categoria D</option> 
+		<option>Categoria E</option>		
+      </select>
+    </div>
+	
+    <button type="submit" class="btn btn-default btn-lg center-block">Enviar</button>
+  </form>
+
+</br>
+<div id="sucessAlert" class="alert alert-success hidden">
+  <strong>Sucesso!</strong>
+  <a id="message"></a>.
+</div>
+
+<div id="erroAlert" class="alert alert-danger hidden">
+  <strong>Erro!</strong>
+  <a id="message2"></a>.
+</div>
+
+</div>
+
+</body>
+</html>

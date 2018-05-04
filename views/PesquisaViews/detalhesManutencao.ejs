@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Detalhes de Manutenção</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+<% include ../Fixos/VeiculosNavBar.ejs %>
+  
+<div class="container">
+
+  <h2>Informações de manutenção do veículo <%= placa %> </h2>
+  <p>Informações da manutenção:</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Data</th>
+		<th>Valor</th>
+		<th>Tipo</th>
+		<th>Data prevista de término</th>
+        <th>Usuário responsável</th>
+        <th>Detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% docs.forEach(function(customer){ %>
+         <tr>
+        	  <td> <%= customer.placa %> </td>
+       		  <td> <%= customer.data %> </td>
+			      <td> <%= customer.valor %> </td>				
+            <td> <%= customer.tipo %> </td>
+            <td> <%= customer.dataprevista %> </td>
+            <td> <%= customer.usuarioMatricola %> </td>
+            <td><button type="button" id="btnS<%= customer._id %>" class="btn btn-primary">Detalhes</button></td>            
+         </tr>
+      	<% }) %>      
+    </tbody>
+  </table>
+  <% docs.forEach(function(customer){ %>
+    <form id="myForm<%= customer._id %>" action="/veiculos/devolver" method="POST" class="hidden">
+        <h1>Detalhes :</h1>
+        <h2> <%= customer.detalhes %> </h2>		
+    </form>
+    <script> 
+            $( "#btnS<%= customer._id %>" ).click(function() {
+              $("form").addClass("hidden");
+              $("#myForm<%= customer._id %>").removeClass("hidden");
+          });
+    </script>
+  <% }) %>      
+</div>
+
+</body>
+</html>

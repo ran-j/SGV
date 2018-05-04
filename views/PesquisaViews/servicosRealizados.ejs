@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Serviço Realizados</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+<% include ../Fixos/VeiculosNavBar.ejs %>
+  
+<div class="container">
+
+  <h2>Informações de serviços para o veículo: <%= placa %> </h2>
+  <%if (Manut.length > 0) { %>
+  <p>Informações da manutenção:</p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Data</th>
+		<th>Valor</th>
+		<th>Tipo</th>
+		<th>Data prevista de término</th>
+        <th>Usuário responsável</th>
+        <th>Detalhes</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% Manut.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.placa %> </td>
+       		<td> <%= customer.data %> </td>
+			<td> <%= customer.valor %> </td>				
+            <td> <%= customer.tipo %> </td>
+            <td> <%= customer.dataprevista %> </td>
+            <td> <%= customer.usuarioMatricola %> </td>
+            <td> <%= customer.detalhes %> </td>            
+         </tr>
+      	<% }) %>      
+    </tbody>
+  </table>
+  <% } %>
+  <%if (Abaste.length > 0) { %>
+</br>
+  <h2>Informações da Abastecimento:</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Data</th>
+		<th>Valor</th>
+		<th>Litros</th>
+        <th>Usuário responsável</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% Abaste.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.placa %> </td>
+       		<td> <%= customer.data %> </td>
+			<td> <%= customer.valor %> </td>				
+            <td> <%= customer.litros %> </td>
+            <td> <%= customer.usuarioMatricola %> </td>   
+         </tr>
+      	<% }) %>      
+    </tbody>
+  </table>
+  <% } %>
+  <%if (Limp.length > 0) { %>
+</br>
+  <h2>Informações da Limpeza:</h2>            
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Usuário responsável</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% Limp.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.placa %> </td>
+       		<td> <%= customer.data %> </td>
+			<td> <%= customer.valor %> </td>				
+            <td> <%= customer.usuarioMatricola %> </td>   
+         </tr>
+      	<% }) %>      
+    </tbody>
+  </table>
+  <% } %>
+     
+</div>
+
+</body>
+</html>

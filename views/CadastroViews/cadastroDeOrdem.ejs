@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cadastro de Ordem</title>
+    <% include ../Fixos/Declaracoe.ejs %>
+</head>
+
+<body>
+
+    <% include ../Fixos/VeiculosComunNavBar.ejs %>
+
+    <div class="container">
+        <h2>Cadastrar Serviço</h2>
+        <p>Cadastrar um serviço realizado no veículo que está em sua reponsabilidade.</p>
+
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a data-toggle="tab" href="#abastecimento">Abastecimento</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#limpeza">Limpeza</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#manutencao">Manutenção</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="abastecimento" class="tab-pane fade in active">
+                <h3>Cadastrar serviço de Abastecimento </h3>                
+                <form action="/cadastro/ordem" method="POST">
+
+                    <input type="hidden" name="Identificador" value="1"/>
+                    <input type="hidden" name="placa" value=<%= msg %>>
+
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+						<input type="date" name="data" id="datepicker" placeholder="Data do abastecimento"  min="1000-01-01"  max="3000-12-31" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor em R$:</label>
+                        <input type="valor" class="form-control" id="data" placeholder="Valor do abastecimento" name="valor">						
+                    </div>
+
+                    <div class="form-group">
+                        <label for="litros">Litros:</label>
+                        <input type="text" class="form-control" id="litros" placeholder="Litros abastecidos" name="litros">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+            <div id="limpeza" class="tab-pane fade">
+                <h3>Cadastrar serviço de Limpeza </h3>
+                <form action="/cadastro/ordem" method="POST" >
+                    <input type="hidden" name="Identificador" value="2"/>
+                    <input type="hidden" name="placa" value=<%= msg %>>
+
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="date" name="data" id="datepicker" placeholder="Data do abastecimento"  min="1000-01-01"  max="3000-12-31" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor em R$:</label>
+                        <input type="text" class="form-control" id="valor" placeholder="Valor do abastecimento" name="valor">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+            <div id="manutencao" class="tab-pane fade">
+                <h3>Cadastrar serviço de Manutenção</h3>
+                <form action="/cadastro/ordem" method="POST">
+
+                    <input type="hidden" name="Identificador" value="3"/>
+                    <input type="hidden" name="placa" value=<%= msg %>>
+
+                    <div class="form-group">
+                        <label for="data">Data:</label>
+                        <input type="date" name="data" id="datepicker" placeholder="Data do abastecimento"  min="1000-01-01"  max="3000-12-31" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="valor">Valor em R$:</label>
+                        <input type="text" class="form-control" id="valor" placeholder="Valor do abastecimento" name="valor">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="detalhes">Detalhes da manutenção:</label>
+                        <input type="text" class="form-control" id="detalhes" placeholder="Detalhes sobre oque foi feito" name="detalhes">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tipo">Tipo:</label>
+                        <select class="form-control" id="tipo" name="tipo">
+                            <option>Preventiva</option>
+                            <option>Corretiva</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="previsao">Data de previsão de fim da manutenção:</label>
+                        <input type="date" name="previsao" id="previsao" placeholder="Data do abastecimento"  min="1000-01-01"  max="3000-12-31" class="form-control">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+
+            </div>
+        </div>
+    </br>
+
+    <% if (MostrarDados === 3) { %>         
+      
+        <div class="alert alert-danger">
+          <strong>Erro!</strong> <%= Retorno %>.
+        </div>
+        
+    <% } else if (MostrarDados === 4) { %>
+          
+        <div class="alert alert-success">
+          <strong>Sucesso!</strong> <%= Retorno %>.
+        </div>
+      
+    <% } %>
+</div>
+</body>
+
+</html>

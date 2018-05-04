@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Veículos Disponiveis</title>
+  <% include ../Fixos/Declaracoe.ejs %>
+</head>
+<body>
+
+  <% include ../Fixos/VeiculosNavBar.ejs %>
+  
+<div class="container">
+   <h2>Veículo disponíveis</h2>
+  <p>Lista de veículo disponíveis.</p>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Placa</th>
+		<th>Marca</th>
+        <th>Tipo</th>
+        <th>Categoria de CNH</th>
+		<th>Status</th>
+        <th>Quilometragem</th>
+		<th>Combustível</th>
+        <th>Ação</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% docs.forEach(function(customer){ %>
+         <tr>
+        	<td> <%= customer.placa %> </td>
+       		<td> <%= customer.marca %> </td>			
+			<td> <%= customer.tipo %> </td>
+            <td> <%= customer.categoriaDeCNH %> </td>
+			<td> <%= customer.status %> </td>				
+            <td> <%= customer.quilometragem %> </td> 
+			<td> <%= customer.combustivel %> </td> 		
+            <td><p><a href="/consultas/usuarios/habilitados/paraveicolo/<%= customer.categoriaDeCNH %>">Possiveis motoristas</a></p></td>
+         </tr>
+         <% }) %>
+       </tbody>
+  	</table>
+</div>
+
+</body>
+</html>

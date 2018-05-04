@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="jumbotron">
+    <h1>SVG</h1>      
+    <p>Sistema de gerenciamento de veículos.</p>
+  </div>
+   
+     <form action="/" method="post">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+      <input id="email" name="matricula" type="text" class="form-control" name="email" placeholder="Matrícula">
+    </div>
+    </br>
+   <div class="input-group">
+      <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+      <input id="password" name="logpassword" type="password" class="form-control" name="password" placeholder="Senha">
+    </div>
+    </br>
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Logar</button>
+
+  </form></br>
+
+  <%if (msg) { %>
+    <div class="alert alert-danger">
+      <%= msg %>
+    </div>
+  <% } %>
+     
+</div>
+
+</body>
+</html>
